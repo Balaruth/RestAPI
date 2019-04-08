@@ -12,10 +12,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # only affects extension b
 app.secret_key = 'devkey'
 api = Api(app)
 
-@app.before_first_request
-def create_tables():
-	db.create_all()  # will not recreate tables if they already exist
-
 jwt = JWT(app, authenticate, identity)  # default: /auth endpoint
 
 api.add_resource(Item, '/item/<string:name>')  # http://127.0.0.1:5000/item/Moog%20Modulator - Is like an @app.route decorator
